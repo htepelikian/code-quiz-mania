@@ -10,6 +10,35 @@
 </head>
 <body>
     <h1> Code Quiz Mania!</h1>
-    <button>Begin Quiz!</button>
+    <div><button>Begin Quiz!</button></div>
+
+    <div class="info_box">
+    <div class="info_title">
+        <span>Quiz rules</span>
+    </div>
+    <div class="info_list">
+        <div class="info">1. You have 60 seconds to complete this quiz.</div>
+        <div class="info">2. If you answer a question incorrectly, time will be subtracted from the clock.</div>
+        <div class="info">3. Once you finish, or run out of time, the quiz will end.</div>
+        <div class="info">4. Once the game finishes, you will be prompted to enter your initials and score.</div>
+    
+
+        <div id="question">Question</div>
+        <div id="answer-buttons" class="btn-grid"></div>
+            <button class="btn">Answer 1</button>
+            <button class="btn">Answer 2</button>
+            <button class="btn">Answer 3</button>
+            <button class="btn">Answer 4</button>
+
+        <div class="container">
+            <div id="question-container" class="hide"></div>
+            <div class="controls">
+                <button id="start-btn" class="start-btn btn">Start</button>
+                <button id="next-btn" class="next-btn btn">Next</button>
+            </div>
+        </div>
+    </div>
+
+</div>
 </body>
 </html>
