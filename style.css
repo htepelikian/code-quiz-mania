@@ -17,3 +17,23 @@
     margin: 7px;
 }
 
+/* Body */
+
+body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: cornflowerblue;
+}
+
+.quizBody {
+    text-align: center;
+    padding: 12vh;
+}
+
+h4 {
+    padding: 10px 8px 10px 8px;
+}
+
+a {
+    text-decoration: none;
+    color:white;
+}
