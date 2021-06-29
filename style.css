@@ -17,7 +17,7 @@
     margin: 7px;
 }
 
-/* Body */
+/* Body styling */
 
 body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -36,4 +36,27 @@ h4 {
 a {
     text-decoration: none;
     color:white;
+}
+
+
+/* Button styling */
+button {
+    border: none;
+    background-color: white;
+    color: blue;
+    border-radius: 5px;
+    padding: 10px 15px 10px 15px;
+    font-size: 17px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    margin: 4px;
+}
+
+/* Button hover feature AND color */
+button:hover {
+    transition-duration: 0.5s;
+    background-color: blue;
+}
+
+#quiz {
+    text-align: center;
 }
