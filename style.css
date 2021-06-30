@@ -24,7 +24,7 @@ body {
     background-color: cornflowerblue;
 }
 
-.quizBody {
+#quizBody {
     text-align: center;
     padding: 12vh;
 }
