@@ -41,12 +41,24 @@ document.getElementById("timeLeft").innerHTML = timeLeft;
 timer = setInterval(function() {
     timeLeft--;
     document.getElementById("timeLeft").innerHTML = timeLeft;
-    //End game if time is at 0 even if all questions are not answered
-    if (timeLeft <= 0) {
-        clearInterval(timer);
-        endGame(); 
-    }
+//End game if time is at 0 even if all questions are not answered
+if (timeLeft <= 0) {
+    clearInterval(timer);
+    endGame(); 
+}
 }, 1000);
 
 next();
+}
+
+//User gains 15 points for each correct answer!
+function correct() {
+    score += 15;
+    next();
+}
+        
+//Takes away 10 seconds for every incorrect answer
+function incorrect() {
+    timeLeft -= 10; 
+    next();
 }
