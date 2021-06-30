@@ -19,11 +19,6 @@ var questions = [{
     choices: ["1848( )", "1912( )", "1850( )", "1902( )"],
     answer: "1848( )"
 },
-{
-    title: "What year did the titanic sink?",
-    choices: ["1890( )", "1898( )", "1912( )", "1906( )"],
-    answer: "1912( )"
-}
 ]
 
 //Setting values for score, question, time/clock/timer.
@@ -51,6 +46,70 @@ if (timeLeft <= 0) {
 next();
 }
 
+//End timer to end game
+function endGame() {
+    clearInterval(timer);
+    
+var quizContent = `
+    <h2>Time's Up!</h2>
+    <h3>` + score +  ` /100!</h3>
+    <input type="text" id="name" placeholder="Initials"> 
+    <button onclick="setScore()">Set score!</button>`;
+
+    document.getElementById("quizBody").innerHTML = quizContent;
+}
+
+//store the scores on local storage
+function setScore() {
+    localStorage.setItem("highscore", score);
+    localStorage.setItem("highscoreName",  document.getElementById('name').value);
+    getScore();
+}
+
+
+function getScore() {
+    var quizContent = `
+    <h2>` + localStorage.getItem("highscoreName") + `'s highscore is:</h2>
+    <h1>` + localStorage.getItem("highscore") + `</h1><br> 
+    
+    <button onclick="clearScore()">Clear score!</button><button onclick="resetGame()">Play Again!</button>
+    
+    `;
+
+    document.getElementById("quizBody").innerHTML = quizContent;
+}
+
+//clears the score name and value in the local storage if the user selects 'clear score'
+function clearScore() {
+    localStorage.setItem("highscore", "");
+    localStorage.setItem("highscoreName",  "");
+
+    resetGame();
+}
+
+//reset the game 
+function resetGame() {
+    clearInterval(timer);
+    score = 0;
+    currentQuestion = -1;
+    timeLeft = 0;
+    timer = null;
+
+    document.getElementById("timeLeft").innerHTML = timeLeft;
+
+    var quizContent = `
+    <h1>
+        JavaScript Quiz!
+    </h1>
+    <h3>
+        Click to play!   
+    </h3>
+    <button onclick="start()">Start!</button>`;
+
+    document.getElementById("quizBody").innerHTML = quizContent;
+}
+
+
 //User gains 15 points for each correct answer!
 function correct() {
     score += 15;
@@ -63,16 +122,28 @@ function incorrect() {
     next();
 }
 
+//loops through the questions 
+function next() {
+    currentQuestion++;
 
-//End timer to end game
-function endGame() {
-    clearInterval(timer);
-    
-var quizContent = `
-    <h2>Time's Up!</h2>
-    <h3>` + score +  ` /100!</h3>
-    <input type="text" id="name" placeholder="Initials"> 
-    <button onclick="setScore()">Set score!</button>`;
+    if (currentQuestion > questions.length - 1) {
+        endGame();
+        return;
+    }
+
+    var quizContent = "<h2>" + questions[currentQuestion].title + "</h2>"
+
+    for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].choices.length; buttonLoop++) {
+        var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>"; 
+        buttonCode = buttonCode.replace("[CHOICE]", questions[currentQuestion].choices[buttonLoop]);
+        if (questions[currentQuestion].choices[buttonLoop] == questions[currentQuestion].answer) {
+            buttonCode = buttonCode.replace("[ANS]", "correct()");
+        } else {
+            buttonCode = buttonCode.replace("[ANS]", "incorrect()");
+        }
+        quizContent += buttonCode
+    }
+
 
     document.getElementById("quizBody").innerHTML = quizContent;
 }
