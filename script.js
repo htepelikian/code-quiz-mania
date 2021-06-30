@@ -23,7 +23,7 @@ var questions = [{
 
 //Setting values for score, question, time/clock/timer.
 var score = 0;
-var currentQuestion = -1;
+var quizQuestion = -1;
 var timeLeft = 0;
 var timer;
 
@@ -59,7 +59,8 @@ var quizContent = `
     document.getElementById("quizBody").innerHTML = quizContent;
 }
 
-//store the scores on local storage
+
+//Highscore stored in local storage
 function setScore() {
     localStorage.setItem("highscore", score);
     localStorage.setItem("highscoreName",  document.getElementById('name').value);
@@ -79,7 +80,7 @@ function getScore() {
     document.getElementById("quizBody").innerHTML = quizContent;
 }
 
-//clears the score name and value in the local storage if the user selects 'clear score'
+//Clear score function from highscore list
 function clearScore() {
     localStorage.setItem("highscore", "");
     localStorage.setItem("highscoreName",  "");
@@ -87,11 +88,11 @@ function clearScore() {
     resetGame();
 }
 
-//reset the game 
+//Game reset 
 function resetGame() {
     clearInterval(timer);
     score = 0;
-    currentQuestion = -1;
+    quizQuestion = -1;
     timeLeft = 0;
     timer = null;
 
@@ -99,10 +100,10 @@ function resetGame() {
 
     var quizContent = `
     <h1>
-        JavaScript Quiz!
+        Code Quiz Mania!
     </h1>
     <h3>
-        Click to play!   
+        Begin Quiz!   
     </h3>
     <button onclick="start()">Start!</button>`;
 
@@ -110,9 +111,9 @@ function resetGame() {
 }
 
 
-//User gains 15 points for each correct answer!
+//User gains 25 points for each correct answer!
 function correct() {
-    score += 15;
+    score += 25;
     next();
 }
         
@@ -122,21 +123,21 @@ function incorrect() {
     next();
 }
 
-//loops through the questions 
+//Questions loop
 function next() {
-    currentQuestion++;
+    quizQuestion++;
 
-    if (currentQuestion > questions.length - 1) {
+    if (quizQuestion > questions.length - 1) {
         endGame();
         return;
     }
 
-    var quizContent = "<h2>" + questions[currentQuestion].title + "</h2>"
+    var quizContent = "<h2>" + questions[quizQuestion].title + "</h2>"
 
-    for (var buttonLoop = 0; buttonLoop < questions[currentQuestion].choices.length; buttonLoop++) {
+    for (var buttonLoop = 0; buttonLoop < questions[quizQuestion].choices.length; buttonLoop++) {
         var buttonCode = "<button onclick=\"[ANS]\">[CHOICE]</button>"; 
-        buttonCode = buttonCode.replace("[CHOICE]", questions[currentQuestion].choices[buttonLoop]);
-        if (questions[currentQuestion].choices[buttonLoop] == questions[currentQuestion].answer) {
+        buttonCode = buttonCode.replace("[CHOICE]", questions[quizQuestion].choices[buttonLoop]);
+        if (questions[quizQuestion].choices[buttonLoop] == questions[quizQuestion].answer) {
             buttonCode = buttonCode.replace("[ANS]", "correct()");
         } else {
             buttonCode = buttonCode.replace("[ANS]", "incorrect()");
