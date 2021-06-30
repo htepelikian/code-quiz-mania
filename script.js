@@ -62,3 +62,17 @@ function incorrect() {
     timeLeft -= 10; 
     next();
 }
+
+
+//End timer to end game
+function endGame() {
+    clearInterval(timer);
+    
+var quizContent = `
+    <h2>Time's Up!</h2>
+    <h3>` + score +  ` /100!</h3>
+    <input type="text" id="name" placeholder="Initials"> 
+    <button onclick="setScore()">Set score!</button>`;
+
+    document.getElementById("quizBody").innerHTML = quizContent;
+}
